@@ -148,7 +148,7 @@ static void removekey (Node *n) {
 
 
 static void traversetable (GCState *st, Table *h) {
-  int i;
+  lua_int i;
   int weakkey = 0;
   int weakvalue = 0;
   const TObject *mode;
@@ -226,7 +226,7 @@ static void traverseclosure (GCState *st, Closure *cl) {
 
 
 static void checkstacksizes (lua_State *L, StkId max) {
-  StkIdx used = L->ci - L->base_ci;  /* number of `ci' in use */
+  lua_int used = L->ci - L->base_ci;  /* number of `ci' in use */
   if (4*used < L->size_ci && 2*BASIC_CI_SIZE < L->size_ci)
     luaD_reallocCI(L, L->size_ci/2);  /* still big enough... */
   else condhardstacktests(luaD_reallocCI(L, L->size_ci));
@@ -329,7 +329,7 @@ static void cleartablekeys (GCObject *l) {
 static void cleartablevalues (GCObject *l) {
   while (l) {
     Table *h = gcotoh(l);
-    int i = h->sizearray;
+    lua_int i = h->sizearray;
     lua_assert(h->marked & VALUEWEAK);
     while (i--) {
       TObject *o = &h->array[i];

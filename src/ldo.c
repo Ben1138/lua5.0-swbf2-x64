@@ -94,7 +94,7 @@ int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
 static void restore_stack_limit (lua_State *L) {
   L->stack_last = L->stack+L->stacksize-1;
   if (L->size_ci > LUA_MAXCALLS) {  /* there was an overflow? */
-    StkIdx inuse = (L->ci - L->base_ci);
+    lua_int inuse = (L->ci - L->base_ci);
     if (inuse + 1 < LUA_MAXCALLS)  /* can `undo' overflow? */
       luaD_reallocCI(L, LUA_MAXCALLS);
   }
@@ -117,7 +117,7 @@ static void correctstack (lua_State *L, TObject *oldstack) {
 }
 
 
-void luaD_reallocstack (lua_State *L, int newsize) {
+void luaD_reallocstack (lua_State *L, lua_int newsize) {
   TObject *oldstack = L->stack;
   luaM_reallocvector(L, L->stack, L->stacksize, newsize, TObject);
   L->stacksize = newsize;
@@ -126,7 +126,7 @@ void luaD_reallocstack (lua_State *L, int newsize) {
 }
 
 
-void luaD_reallocCI (lua_State *L, int newsize) {
+void luaD_reallocCI (lua_State *L, lua_int newsize) {
   CallInfo *oldci = L->base_ci;
   luaM_reallocvector(L, L->base_ci, L->size_ci, newsize, CallInfo);
   L->size_ci = cast(unsigned short, newsize);
@@ -135,7 +135,7 @@ void luaD_reallocCI (lua_State *L, int newsize) {
 }
 
 
-void luaD_growstack (lua_State *L, int n) {
+void luaD_growstack (lua_State *L, lua_int n) {
   if (n <= L->stacksize)  /* double size is enough? */
     luaD_reallocstack(L, 2*L->stacksize);
   else
@@ -180,11 +180,11 @@ void luaD_callhook (lua_State *L, int event, int line) {
 }
 
 
-static void adjust_varargs (lua_State *L, int nfixargs, StkId base) {
+static void adjust_varargs (lua_State *L, lua_int nfixargs, StkId base) {
   int i;
   Table *htab;
   TObject nname;
-  StkIdx actual = L->top - base;  /* actual number of arguments */
+  lua_int actual = L->top - base;  /* actual number of arguments */
   if (actual < nfixargs) {
     luaD_checkstack(L, nfixargs - actual);
     for (; actual < nfixargs; ++actual)
@@ -356,7 +356,7 @@ static int resume_error (lua_State *L, const char *msg) {
 }
 
 
-LUA_API int lua_resume (lua_State *L, int nargs) {
+LUA_API int lua_resume (lua_State *L, lua_int nargs) {
   int status;
   lu_byte old_allowhooks;
   lua_lock(L);
@@ -383,7 +383,7 @@ LUA_API int lua_resume (lua_State *L, int nargs) {
 }
 
 
-LUA_API int lua_yield (lua_State *L, int nresults) {
+LUA_API int lua_yield (lua_State *L, lua_int nresults) {
   CallInfo *ci;
   lua_lock(L);
   ci = L->ci;

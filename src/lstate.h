@@ -136,7 +136,7 @@ struct lua_State {
   CallInfo *ci;  /* call info for current function */
   StkId stack_last;  /* last free slot in the stack */
   StkId stack;  /* stack base */
-  int stacksize;
+  lua_int stacksize;
   CallInfo *end_ci;  /* points after end of ci array*/
   CallInfo *base_ci;  /* array of CallInfo's */
   unsigned short size_ci;  /* size of array `base_ci' */
