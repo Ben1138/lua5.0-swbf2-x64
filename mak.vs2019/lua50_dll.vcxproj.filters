@@ -7,6 +7,9 @@
     <Filter Include="src\lib">
       <UniqueIdentifier>{3be33617-ea0c-4358-93e9-d95179f910af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="headers">
+      <UniqueIdentifier>{f6cb0e17-1934-4b0e-8864-48280362a2b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\lib\lauxlib.c">
@@ -98,5 +101,76 @@
     <None Include="..\src\lua50.def">
       <Filter>src</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\lapi.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lcode.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ldebug.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ldo.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lfunc.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lgc.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\llex.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\llimits.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lmem.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lobject.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lopcodes.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lparser.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lstate.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lstring.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ltable.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ltm.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lundump.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lvm.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\lzio.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lauxlib.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lua.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lua.hpp">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\lualib.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
