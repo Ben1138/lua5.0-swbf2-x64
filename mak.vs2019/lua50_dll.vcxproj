@@ -132,13 +132,13 @@
       <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50.dll</OutputFile>
+      <OutputFile>$(OutDir)lua50.x64.dll</OutputFile>
       <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)lua50.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)lua50.x64.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
-      <ImportLibrary>../lib/x64/lua50.lib</ImportLibrary>
+      <ImportLibrary>../lib/x64/lua50.x64.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
