@@ -47,7 +47,7 @@ typedef int ls_hash;
 
 /* an unsigned integer big enough to count the total memory used by Lua; */
 /* it should be at least as large as size_t */
-typedef unsigned long lu_mem;
+typedef uint64_t lu_mem;
 
 #define MAX_LUMEM	ULONG_MAX
 
