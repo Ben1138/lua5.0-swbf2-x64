@@ -145,7 +145,7 @@ LUALIB_API void *luaL_checkudata (lua_State *L, int ud, const char *tname) {
 }
 
 
-LUALIB_API void luaL_checkstack (lua_State *L, int space, const char *mes) {
+LUALIB_API void luaL_checkstack (lua_State *L, lua_int space, const char *mes) {
   if (!lua_checkstack(L, space))
     luaL_error(L, "stack overflow (%s)", mes);
 }
@@ -196,7 +196,7 @@ LUALIB_API lua_Number luaL_optnumber (lua_State *L, int narg, lua_Number def) {
 }
 
 
-LUALIB_API int luaL_getmetafield (lua_State *L, int obj, const char *event) {
+LUALIB_API int luaL_getmetafield (lua_State *L, lua_int obj, const char *event) {
   if (!lua_getmetatable(L, obj))  /* no metatable? */
     return 0;
   lua_pushstring(L, event);
@@ -212,7 +212,7 @@ LUALIB_API int luaL_getmetafield (lua_State *L, int obj, const char *event) {
 }
 
 
-LUALIB_API int luaL_callmeta (lua_State *L, int obj, const char *event) {
+LUALIB_API int luaL_callmeta (lua_State *L, lua_int obj, const char *event) {
   obj = abs_index(L, obj);
   if (!luaL_getmetafield(L, obj, event))  /* no metafield? */
     return 0;
@@ -279,7 +279,7 @@ static void getsizes (lua_State *L) {
 }
 
 
-void luaL_setn (lua_State *L, int t, int n) {
+void luaL_setn (lua_State *L, lua_int t, lua_int n) {
   t = abs_index(L, t);
   lua_pushliteral(L, "n");
   lua_rawget(L, t);
@@ -298,7 +298,7 @@ void luaL_setn (lua_State *L, int t, int n) {
 }
 
 
-int luaL_getn (lua_State *L, int t) {
+int luaL_getn (lua_State *L, lua_int t) {
   int n;
   t = abs_index(L, t);
   lua_pushliteral(L, "n");  /* try t.n */
@@ -416,7 +416,7 @@ LUALIB_API void luaL_buffinit (lua_State *L, luaL_Buffer *B) {
 /* }====================================================== */
 
 
-LUALIB_API int luaL_ref (lua_State *L, int t) {
+LUALIB_API int luaL_ref (lua_State *L, lua_int t) {
   int ref;
   t = abs_index(L, t);
   if (lua_isnil(L, -1)) {
@@ -442,7 +442,7 @@ LUALIB_API int luaL_ref (lua_State *L, int t) {
 }
 
 
-LUALIB_API void luaL_unref (lua_State *L, int t, int ref) {
+LUALIB_API void luaL_unref (lua_State *L, lua_int t, int ref) {
   if (ref >= 0) {
     t = abs_index(L, t);
     lua_rawgeti(L, t, FREELIST_REF);
@@ -475,7 +475,7 @@ static const char *getF (lua_State *L, void *ud, size_t *size) {
 }
 
 
-static int errfile (lua_State *L, int fnameindex) {
+static int errfile (lua_State *L, lua_int fnameindex) {
   const char *filename = lua_tostring(L, fnameindex) + 1;
   lua_pushfstring(L, "cannot read %s: %s", filename, strerror(errno));
   lua_remove(L, fnameindex);
@@ -487,7 +487,7 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   LoadF lf;
   int status, readstatus;
   int c;
-  int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack */
+  lua_int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack */
   if (filename == NULL) {
     lua_pushliteral(L, "=stdin");
     lf.f = stdin;

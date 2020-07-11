@@ -144,6 +144,9 @@
       <SubSystem>Windows</SubSystem>
       <ImportLibrary>../lib/x64/lua50.x64.lib</ImportLibrary>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat" CALL "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -199,6 +202,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <ImportLibrary>../lib/x64/lua50.lib</ImportLibrary>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat" CALL "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\lapi.c" />

@@ -67,7 +67,7 @@ static int luaB_setn (lua_State *L) {
 
 
 static int luaB_tinsert (lua_State *L) {
-  int v = lua_gettop(L);  /* number of arguments */
+  lua_int v = lua_gettop(L);  /* number of arguments */
   int n = aux_getn(L, 1) + 1;
   int pos;  /* where to insert new element */
   if (v == 2)  /* called with only 2 arguments */

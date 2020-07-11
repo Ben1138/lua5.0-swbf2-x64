@@ -45,11 +45,14 @@ typedef struct lua_State lua_State;
 
 typedef int (*lua_CFunction) (lua_State *L);
 
+// original implementation was for 32 bit, so all stack index and pointer handling
+// happened interchangeably with int32, which doesn't work on x64 anymore, since
+// pointers in x64 are 64 bit
 // use this instead of int when dealing with stack indices / pointers
 #ifdef WIN32
-typedef int32_t StkIdx;
+typedef int32_t lua_int;
 #else
-typedef int64_t StkIdx;
+typedef int64_t lua_int;
 #endif
 
 
@@ -117,40 +120,40 @@ LUA_API lua_CFunction lua_atpanic (lua_State *L, lua_CFunction panicf);
 /*
 ** basic stack manipulation
 */
-LUA_API StkIdx   lua_gettop (lua_State *L);
-LUA_API void  lua_settop (lua_State *L, StkIdx idx);
-LUA_API void  lua_pushvalue (lua_State *L, StkIdx idx);
-LUA_API void  lua_remove (lua_State *L, StkIdx idx);
-LUA_API void  lua_insert (lua_State *L, StkIdx idx);
-LUA_API void  lua_replace (lua_State *L, StkIdx idx);
-LUA_API int   lua_checkstack (lua_State *L, int sz);
+LUA_API lua_int   lua_gettop (lua_State *L);
+LUA_API void  lua_settop (lua_State *L, lua_int idx);
+LUA_API void  lua_pushvalue (lua_State *L, lua_int idx);
+LUA_API void  lua_remove (lua_State *L, lua_int idx);
+LUA_API void  lua_insert (lua_State *L, lua_int idx);
+LUA_API void  lua_replace (lua_State *L, lua_int idx);
+LUA_API int   lua_checkstack (lua_State *L, lua_int sz);
 
-LUA_API void  lua_xmove (lua_State *from, lua_State *to, int n);
+LUA_API void  lua_xmove (lua_State *from, lua_State *to, lua_int n);
 
 
 /*
 ** access functions (stack -> C)
 */
 
-LUA_API int             lua_isnumber (lua_State *L, StkIdx idx);
-LUA_API int             lua_isstring (lua_State *L, StkIdx idx);
-LUA_API int             lua_iscfunction (lua_State *L, StkIdx idx);
-LUA_API int             lua_isuserdata (lua_State *L, StkIdx idx);
-LUA_API int             lua_type (lua_State *L, StkIdx idx);
+LUA_API int             lua_isnumber (lua_State *L, lua_int idx);
+LUA_API int             lua_isstring (lua_State *L, lua_int idx);
+LUA_API int             lua_iscfunction (lua_State *L, lua_int idx);
+LUA_API int             lua_isuserdata (lua_State *L, lua_int idx);
+LUA_API int             lua_type (lua_State *L, lua_int idx);
 LUA_API const char     *lua_typename (lua_State *L, int tp);
 
-LUA_API int            lua_equal (lua_State *L, StkIdx idx1, StkIdx idx2);
-LUA_API int            lua_rawequal (lua_State *L, StkIdx idx1, StkIdx idx2);
-LUA_API int            lua_lessthan (lua_State *L, StkIdx idx1, StkIdx idx2);
+LUA_API int            lua_equal (lua_State *L, lua_int idx1, lua_int idx2);
+LUA_API int            lua_rawequal (lua_State *L, lua_int idx1, lua_int idx2);
+LUA_API int            lua_lessthan (lua_State *L, lua_int idx1, lua_int idx2);
 
-LUA_API lua_Number      lua_tonumber (lua_State *L, StkIdx idx);
-LUA_API int             lua_toboolean (lua_State *L, StkIdx idx);
-LUA_API const char     *lua_tostring (lua_State *L, StkIdx idx);
-LUA_API size_t          lua_strlen (lua_State *L, StkIdx idx);
-LUA_API lua_CFunction   lua_tocfunction (lua_State *L, StkIdx idx);
-LUA_API void	       *lua_touserdata (lua_State *L, StkIdx idx);
-LUA_API lua_State      *lua_tothread (lua_State *L, StkIdx idx);
-LUA_API const void     *lua_topointer (lua_State *L, StkIdx idx);
+LUA_API lua_Number      lua_tonumber (lua_State *L, lua_int idx);
+LUA_API int             lua_toboolean (lua_State *L, lua_int idx);
+LUA_API const char     *lua_tostring (lua_State *L, lua_int idx);
+LUA_API size_t          lua_strlen (lua_State *L, lua_int idx);
+LUA_API lua_CFunction   lua_tocfunction (lua_State *L, lua_int idx);
+LUA_API void	       *lua_touserdata (lua_State *L, lua_int idx);
+LUA_API lua_State      *lua_tothread (lua_State *L, lua_int idx);
+LUA_API const void     *lua_topointer (lua_State *L, lua_int idx);
 
 
 /*
@@ -171,30 +174,30 @@ LUA_API void  lua_pushlightuserdata (lua_State *L, void *p);
 /*
 ** get functions (Lua -> stack)
 */
-LUA_API void  lua_gettable (lua_State *L, StkIdx idx);
-LUA_API void  lua_rawget (lua_State *L, StkIdx idx);
-LUA_API void  lua_rawgeti (lua_State *L, StkIdx idx, int n);
+LUA_API void  lua_gettable (lua_State *L, lua_int idx);
+LUA_API void  lua_rawget (lua_State *L, lua_int idx);
+LUA_API void  lua_rawgeti (lua_State *L, lua_int idx, int n);
 LUA_API void  lua_newtable (lua_State *L);
 LUA_API void *lua_newuserdata (lua_State *L, size_t sz);
-LUA_API int   lua_getmetatable (lua_State *L, int objindex);
-LUA_API void  lua_getfenv (lua_State *L, StkIdx idx);
+LUA_API int   lua_getmetatable (lua_State *L, lua_int objindex);
+LUA_API void  lua_getfenv (lua_State *L, lua_int idx);
 
 
 /*
 ** set functions (stack -> Lua)
 */
-LUA_API void  lua_settable (lua_State *L, StkIdx idx);
-LUA_API void  lua_rawset (lua_State *L, StkIdx idx);
-LUA_API void  lua_rawseti (lua_State *L, StkIdx idx, int n);
+LUA_API void  lua_settable (lua_State *L, lua_int idx);
+LUA_API void  lua_rawset (lua_State *L, lua_int idx);
+LUA_API void  lua_rawseti (lua_State *L, lua_int idx, int n);
 LUA_API int   lua_setmetatable (lua_State *L, int objindex);
-LUA_API int   lua_setfenv (lua_State *L, StkIdx idx);
+LUA_API int   lua_setfenv (lua_State *L, lua_int idx);
 
 
 /*
 ** `load' and `call' functions (load and run Lua code)
 */
-LUA_API void  lua_call (lua_State *L, int nargs, int nresults);
-LUA_API int   lua_pcall (lua_State *L, int nargs, int nresults, int errfunc);
+LUA_API void  lua_call (lua_State *L, lua_int nargs, int nresults);
+LUA_API int   lua_pcall (lua_State *L, lua_int nargs, int nresults, int errfunc);
 LUA_API int lua_cpcall (lua_State *L, lua_CFunction func, void *ud);
 LUA_API int   lua_load (lua_State *L, lua_Chunkreader reader, void *dt,
                         const char *chunkname);
@@ -205,8 +208,8 @@ LUA_API int lua_dump (lua_State *L, lua_Chunkwriter writer, void *data);
 /*
 ** coroutine functions
 */
-LUA_API int  lua_yield (lua_State *L, int nresults);
-LUA_API int  lua_resume (lua_State *L, int narg);
+LUA_API int  lua_yield (lua_State *L, lua_int nresults);
+LUA_API int  lua_resume (lua_State *L, lua_int narg);
 
 /*
 ** garbage-collection functions
@@ -223,9 +226,9 @@ LUA_API const char *lua_version (void);
 
 LUA_API int   lua_error (lua_State *L);
 
-LUA_API int   lua_next (lua_State *L, StkIdx idx);
+LUA_API lua_int   lua_next (lua_State *L, lua_int idx);
 
-LUA_API void  lua_concat (lua_State *L, StkIdx n);
+LUA_API void  lua_concat (lua_State *L, lua_int n);
 
 
 
@@ -366,7 +369,7 @@ struct lua_Debug {
   int linedefined;	/* (S) */
   char short_src[LUA_IDSIZE]; /* (S) */
   /* private part */
-  StkIdx i_ci;  /* active function */
+  lua_int i_ci;  /* active function */
 };
 
 /* }====================================================================== */

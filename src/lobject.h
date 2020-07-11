@@ -302,7 +302,7 @@ typedef struct Table {
   Node *node;
   Node *firstfree;  /* this position is free; all positions after it are full */
   GCObject *gclist;
-  int sizearray;  /* size of `array' array */
+  lua_int sizearray;  /* size of `array' array */
 } Table;
 
 
