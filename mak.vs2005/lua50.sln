@@ -1,0 +1,53 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua50_dll", "./lua50_dll.vcproj", "{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua50_lib", "./lua50_lib.vcproj", "{FF3B6490-D65F-7B41-982B-8D8339958224}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua50_exe", "./lua50_exe.vcproj", "{1BCC1919-4768-F942-AF2B-486EAEFE50D1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luac50_exe", "./luac50_exe.vcproj", "{6DB82676-9A9B-6B49-A144-9D58E992D4D9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bin2c50_exe", "./bin2c50_exe.vcproj", "{06DD5947-6B04-2A4A-ADD7-227D3B2CFA02}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}.Debug|Win32.Build.0 = Debug|Win32
+		{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}.Release|Win32.ActiveCfg = Release|Win32
+		{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}.Release|Win32.Build.0 = Release|Win32
+		{FF3B6490-D65F-7B41-982B-8D8339958224}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FF3B6490-D65F-7B41-982B-8D8339958224}.Debug|Win32.Build.0 = Debug|Win32
+		{FF3B6490-D65F-7B41-982B-8D8339958224}.Release|Win32.ActiveCfg = Release|Win32
+		{FF3B6490-D65F-7B41-982B-8D8339958224}.Release|Win32.Build.0 = Release|Win32
+		{1BCC1919-4768-F942-AF2B-486EAEFE50D1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1BCC1919-4768-F942-AF2B-486EAEFE50D1}.Debug|Win32.Build.0 = Debug|Win32
+		{1BCC1919-4768-F942-AF2B-486EAEFE50D1}.Release|Win32.ActiveCfg = Release|Win32
+		{1BCC1919-4768-F942-AF2B-486EAEFE50D1}.Release|Win32.Build.0 = Release|Win32
+		{6DB82676-9A9B-6B49-A144-9D58E992D4D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6DB82676-9A9B-6B49-A144-9D58E992D4D9}.Debug|Win32.Build.0 = Debug|Win32
+		{6DB82676-9A9B-6B49-A144-9D58E992D4D9}.Release|Win32.ActiveCfg = Release|Win32
+		{6DB82676-9A9B-6B49-A144-9D58E992D4D9}.Release|Win32.Build.0 = Release|Win32
+		{06DD5947-6B04-2A4A-ADD7-227D3B2CFA02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{06DD5947-6B04-2A4A-ADD7-227D3B2CFA02}.Debug|Win32.Build.0 = Debug|Win32
+		{06DD5947-6B04-2A4A-ADD7-227D3B2CFA02}.Release|Win32.ActiveCfg = Release|Win32
+		{06DD5947-6B04-2A4A-ADD7-227D3B2CFA02}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

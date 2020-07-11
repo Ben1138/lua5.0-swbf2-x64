@@ -1,0 +1,30 @@
+# makefile for Lua interpreter
+
+SFX= 50
+
+LUA= ../..
+
+include $(LUA)/config
+
+EXTRA_DEFS= $(USERCONF)
+OBJS= lua.o
+SRCS= lua.c
+
+T= $(BIN)/lua$(SFX)
+
+all:	$T
+
+$T:	$(OBJS) $(LIB)/liblua$(SFX).a
+	$(CC) -o $@ $(MYLDFLAGS) $(OBJS) -L$(LIB) -llua$(SFX) $(EXTRA_LIBS) $(DLLIB)
+
+$(LIB)/liblua$(SFX).a:
+	cd ..; $(MAKE) -f Makefile.std
+
+clean:
+	rm -f $(OBJS) $T
+
+co:
+	co -q -f -M $(SRCS)
+
+klean:	clean
+	rm -f $(SRCS)
