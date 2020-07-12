@@ -449,12 +449,12 @@ static const char *kname (Proto *p, int c) {
 }
 
 
-static const char *getobjname (CallInfo *ci, lua_int stackpos, const char **name) {
+static const char *getobjname (CallInfo *ci, StkIdx stackpos, const char **name) {
   if (isLua(ci)) {  /* a Lua function? */
     Proto *p = ci_func(ci)->l.p;
     int pc = currentpc(ci);
     Instruction i;
-    *name = luaF_getlocalname(p, stackpos+1, pc);
+    *name = luaF_getlocalname(p, (int)stackpos+1, pc);
     if (*name)  /* is a local? */
       return "local";
     i = luaG_symbexec(p, pc, (int)stackpos);  /* try symbolic execution */

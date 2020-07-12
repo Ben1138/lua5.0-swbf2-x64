@@ -29,8 +29,8 @@ typedef struct luaL_reg {
 
 LUALIB_API void luaL_openlib (lua_State *L, const char *libname,
                                const luaL_reg *l, int nup);
-LUALIB_API int luaL_getmetafield (lua_State *L, lua_int obj, const char *e);
-LUALIB_API int luaL_callmeta (lua_State *L, lua_int obj, const char *e);
+LUALIB_API int luaL_getmetafield (lua_State *L, int obj, const char *e);
+LUALIB_API int luaL_callmeta (lua_State *L, int obj, const char *e);
 LUALIB_API int luaL_typerror (lua_State *L, int narg, const char *tname);
 LUALIB_API int luaL_argerror (lua_State *L, int numarg, const char *extramsg);
 LUALIB_API const char *luaL_checklstring (lua_State *L, int numArg, size_t *l);
@@ -39,7 +39,7 @@ LUALIB_API const char *luaL_optlstring (lua_State *L, int numArg,
 LUALIB_API lua_Number luaL_checknumber (lua_State *L, int numArg);
 LUALIB_API lua_Number luaL_optnumber (lua_State *L, int nArg, lua_Number def);
 
-LUALIB_API void luaL_checkstack (lua_State *L, lua_int sz, const char *msg);
+LUALIB_API void luaL_checkstack (lua_State *L, int sz, const char *msg);
 LUALIB_API void luaL_checktype (lua_State *L, int narg, int t);
 LUALIB_API void luaL_checkany (lua_State *L, int narg);
 
@@ -52,11 +52,11 @@ LUALIB_API int luaL_error (lua_State *L, const char *fmt, ...);
 
 LUALIB_API int luaL_findstring (const char *st, const char *const lst[]);
 
-LUALIB_API int luaL_ref (lua_State *L, lua_int t);
-LUALIB_API void luaL_unref (lua_State *L, lua_int t, int ref);
+LUALIB_API int luaL_ref (lua_State *L, int t);
+LUALIB_API void luaL_unref (lua_State *L, int t, int ref);
 
-LUALIB_API int luaL_getn (lua_State *L, lua_int t);
-LUALIB_API void luaL_setn (lua_State *L, lua_int t, lua_int n);
+LUALIB_API int luaL_getn (lua_State *L, int t);
+LUALIB_API void luaL_setn (lua_State *L, int t, int n);
 
 LUALIB_API int luaL_loadfile (lua_State *L, const char *filename);
 LUALIB_API int luaL_loadbuffer (lua_State *L, const char *buff, size_t sz,

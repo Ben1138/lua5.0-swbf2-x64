@@ -132,8 +132,8 @@ static int arrayindex (const TObject *key) {
 ** elements in the array part, then elements in the hash part. The
 ** beginning and end of a traversal are signalled by -1.
 */
-static lua_int luaH_index (lua_State *L, Table *t, StkId key) {
-  lua_int i;
+static int luaH_index (lua_State *L, Table *t, StkId key) {
+  int i;
   if (ttisnil(key)) return -1;  /* first iteration */
   i = arrayindex(key);
   if (0 <= i && i <= t->sizearray) {  /* is `key' inside array part? */
@@ -143,15 +143,15 @@ static lua_int luaH_index (lua_State *L, Table *t, StkId key) {
     const TObject *v = luaH_get(t, key);
     if (v == &luaO_nilobject)
       luaG_runerror(L, "invalid key for `next'");
-    i = cast(lua_int, (cast(const lu_byte *, v) -
+    i = cast(int, (cast(const lu_byte *, v) -
                    cast(const lu_byte *, gval(gnode(t, 0)))) / sizeof(Node));
     return i + t->sizearray;  /* hash elements are numbered after array ones */
   }
 }
 
 
-lua_int luaH_next (lua_State *L, Table *t, StkId key) {
-  lua_int i = luaH_index(L, t, key);  /* find original element */
+int luaH_next (lua_State *L, Table *t, StkId key) {
+  int i = luaH_index(L, t, key);  /* find original element */
   for (i++; i < t->sizearray; i++) {  /* try first array part */
     if (!ttisnil(&t->array[i])) {  /* a non-nil value? */
       setnvalue(key, cast(lua_Number, i+1));
@@ -204,7 +204,7 @@ static void numuse (const Table *t, int *narray, int *nhash) {
   int totaluse = 0;
   /* count elements in array part */
   for (i=0, lg=0; lg<=MAXBITS; lg++) {  /* for each slice [2^(lg-1) to 2^lg) */
-    lua_int ttlg = twoto(lg);  /* 2^lg */
+    int ttlg = twoto(lg);  /* 2^lg */
     if (ttlg > t->sizearray) {
       ttlg = t->sizearray;
       if (i >= ttlg) break;
@@ -236,8 +236,8 @@ static void numuse (const Table *t, int *narray, int *nhash) {
 }
 
 
-static void setarrayvector (lua_State *L, Table *t, lua_int size) {
-  lua_int i;
+static void setarrayvector (lua_State *L, Table *t, int size) {
+  int i;
   luaM_reallocvector(L, t->array, t->sizearray, size, TObject);
   for (i=t->sizearray; i<size; i++)
      setnilvalue(&t->array[i]);
@@ -245,7 +245,7 @@ static void setarrayvector (lua_State *L, Table *t, lua_int size) {
 }
 
 
-static void setnodevector (lua_State *L, Table *t, lua_int lsize) {
+static void setnodevector (lua_State *L, Table *t, int lsize) {
   int i;
   int size = twoto(lsize);
   if (lsize > MAXBITS)
@@ -269,10 +269,10 @@ static void setnodevector (lua_State *L, Table *t, lua_int lsize) {
 }
 
 
-static void resize (lua_State *L, Table *t, lua_int nasize, lua_int nhsize) {
-  lua_int i;
-  lua_int oldasize = t->sizearray;
-  lua_int oldhsize = t->lsizenode;
+static void resize (lua_State *L, Table *t, int nasize, int nhsize) {
+  int i;
+  int oldasize = t->sizearray;
+  int oldhsize = t->lsizenode;
   Node *nold;
   Node temp[1];
   if (oldhsize)
@@ -324,7 +324,7 @@ static void rehash (lua_State *L, Table *t) {
 */
 
 
-Table *luaH_new (lua_State *L, lua_int narray, int lnhash) {
+Table *luaH_new (lua_State *L, int narray, int lnhash) {
   Table *t = luaM_new(L, Table);
   luaC_link(L, valtogco(t), LUA_TTABLE);
   t->metatable = hvalue(defaultmeta(L));
@@ -434,7 +434,7 @@ static const TObject *luaH_getany (Table *t, const TObject *key) {
 /*
 ** search function for integers
 */
-const TObject *luaH_getnum (Table *t, lua_int key) {
+const TObject *luaH_getnum (Table *t, int key) {
   if (1 <= key && key <= t->sizearray)
     return &t->array[key-1];
   else {
@@ -496,7 +496,7 @@ TObject *luaH_set (lua_State *L, Table *t, const TObject *key) {
 }
 
 
-TObject *luaH_setnum (lua_State *L, Table *t, lua_int key) {
+TObject *luaH_setnum (lua_State *L, Table *t, int key) {
   const TObject *p = luaH_getnum(t, key);
   if (p != &luaO_nilobject)
     return cast(TObject *, p);

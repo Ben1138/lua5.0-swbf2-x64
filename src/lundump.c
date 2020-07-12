@@ -38,9 +38,9 @@ static int ezgetc (LoadState* S)
  return c;
 }
 
-static void ezread (LoadState* S, void* b, size_t n)
+static void ezread (LoadState* S, void* b, int n)
 {
- size_t r=luaZ_read(S->Z,b,n);
+ int r=luaZ_read(S->Z,b,n);
  if (r!=0) unexpectedEOZ(S);
 }
 
@@ -49,7 +49,7 @@ static void LoadBlock (LoadState* S, void* b, size_t size)
  if (S->swap)
  {
   char* p=(char*) b+size-1;
-  size_t n=size;
+  int n=size;
   while (n--) *p--=(char)ezgetc(S);
  }
  else
@@ -64,7 +64,7 @@ static void LoadVector (LoadState* S, void* b, int m, size_t size)
   while (m--)
   {
    char* p=q+size-1;
-   size_t n=size;
+   int n=size;
    while (n--) *p--=(char)ezgetc(S);
    q+=size;
   }

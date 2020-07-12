@@ -40,17 +40,10 @@
 ** any machine, but may not be optimal.
 */
 
-#ifdef WIN32
 /* an unsigned integer to hold hash values */
 typedef unsigned int lu_hash;
 /* its signed equivalent */
 typedef int ls_hash;
-#else
-/* an unsigned integer to hold hash values */
-typedef uint64_t lu_hash;
-/* its signed equivalent */
-typedef int64_t ls_hash;
-#endif
 
 /* an unsigned integer big enough to count the total memory used by Lua; */
 /* it should be at least as large as size_t */

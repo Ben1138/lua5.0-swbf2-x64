@@ -28,7 +28,7 @@
 ** (a console window or a log file, for instance).
 */
 static int luaB_print (lua_State *L) {
-  lua_int n = lua_gettop(L);  /* number of arguments */
+  int n = lua_gettop(L);  /* number of arguments */
   int i;
   lua_getglobal(L, "tostring");
   for (i=1; i<=n; i++) {
@@ -276,11 +276,11 @@ static int luaB_loadfile (lua_State *L) {
 
 static int luaB_dofile (lua_State *L) {
   const char *fname = luaL_optstring(L, 1, NULL);
-  lua_int n = lua_gettop(L);
+  int n = lua_gettop(L);
   int status = luaL_loadfile(L, fname);
   if (status != 0) lua_error(L);
   lua_call(L, 0, LUA_MULTRET);
-  return (int)(lua_gettop(L) - n);
+  return lua_gettop(L) - n;
 }
 
 
@@ -310,7 +310,7 @@ static int luaB_pcall (lua_State *L) {
   status = lua_pcall(L, lua_gettop(L) - 1, LUA_MULTRET, 0);
   lua_pushboolean(L, (status == 0));
   lua_insert(L, 1);
-  return (int)lua_gettop(L);  /* return status + all results */
+  return lua_gettop(L);  /* return status + all results */
 }
 
 
@@ -322,7 +322,7 @@ static int luaB_xpcall (lua_State *L) {
   status = lua_pcall(L, 0, LUA_MULTRET, 1);
   lua_pushboolean(L, (status == 0));
   lua_replace(L, 1);
-  return (int)lua_gettop(L);  /* return status + all results */
+  return lua_gettop(L);  /* return status + all results */
 }
 
 
@@ -543,14 +543,14 @@ static const luaL_reg base_funcs[] = {
 ** =======================================================
 */
 
-static lua_int auxresume (lua_State *L, lua_State *co, lua_int narg) {
+static int auxresume (lua_State *L, lua_State *co, int narg) {
   int status;
   if (!lua_checkstack(co, narg))
     luaL_error(L, "too many arguments to resume");
   lua_xmove(L, co, narg);
   status = lua_resume(co, narg);
   if (status == 0) {
-    lua_int nres = lua_gettop(co);
+    int nres = lua_gettop(co);
     if (!lua_checkstack(L, nres))
       luaL_error(L, "too many results to resume");
     lua_xmove(co, L, nres);  /* move yielded values */
@@ -565,7 +565,7 @@ static lua_int auxresume (lua_State *L, lua_State *co, lua_int narg) {
 
 static int luaB_coresume (lua_State *L) {
   lua_State *co = lua_tothread(L, 1);
-  lua_int r;
+  int r;
   luaL_argcheck(L, co, 1, "coroutine expected");
   r = auxresume(L, co, lua_gettop(L) - 1);
   if (r < 0) {
@@ -576,14 +576,14 @@ static int luaB_coresume (lua_State *L) {
   else {
     lua_pushboolean(L, 1);
     lua_insert(L, -(r + 1));
-    return (int)(r + 1);  /* return true + `resume' returns */
+    return r + 1;  /* return true + `resume' returns */
   }
 }
 
 
 static int luaB_auxwrap (lua_State *L) {
   lua_State *co = lua_tothread(L, lua_upvalueindex(1));
-  lua_int r = auxresume(L, co, lua_gettop(L));
+  int r = auxresume(L, co, lua_gettop(L));
   if (r < 0) {
     if (lua_isstring(L, -1)) {  /* error object is a string? */
       luaL_where(L, 1);  /* add extra info */
@@ -592,7 +592,7 @@ static int luaB_auxwrap (lua_State *L) {
     }
     lua_error(L);  /* propagate error */
   }
-  return (int)r;
+  return r;
 }
 
 

@@ -140,7 +140,7 @@ static int math_ldexp (lua_State *L) {
 
 
 static int math_min (lua_State *L) {
-  lua_int n = lua_gettop(L);  /* number of arguments */
+  int n = lua_gettop(L);  /* number of arguments */
   lua_Number dmin = luaL_checknumber(L, 1);
   int i;
   for (i=2; i<=n; i++) {
@@ -154,7 +154,7 @@ static int math_min (lua_State *L) {
 
 
 static int math_max (lua_State *L) {
-  lua_int n = lua_gettop(L);  /* number of arguments */
+  int n = lua_gettop(L);  /* number of arguments */
   lua_Number dmax = luaL_checknumber(L, 1);
   int i;
   for (i=2; i<=n; i++) {

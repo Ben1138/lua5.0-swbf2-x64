@@ -26,7 +26,7 @@ void luaF_close (lua_State *L, StkId level);
 void luaF_freeproto (lua_State *L, Proto *f);
 void luaF_freeclosure (lua_State *L, Closure *c);
 
-const char *luaF_getlocalname (const Proto *func, lua_int local_number, int pc);
+const char *luaF_getlocalname (const Proto *func, int local_number, int pc);
 
 
 #endif
