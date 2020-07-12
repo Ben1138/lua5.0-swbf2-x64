@@ -312,7 +312,7 @@ int luaV_equalval (lua_State *L, const TObject *t1, const TObject *t2) {
 }
 
 
-void luaV_concat (lua_State *L, StkIdx total, StkIdx last) {
+void luaV_concat (lua_State *L, int total, int last) {
   do {
     StkId top = L->base + last + 1;
     int n = 2;  /* number of elements handled in this pass (at least 2) */
