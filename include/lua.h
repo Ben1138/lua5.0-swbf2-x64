@@ -12,6 +12,7 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdint.h>
 
 
 #define LUA_VERSION	"Lua 5.0.3"
@@ -88,6 +89,11 @@ typedef double lua_Number;
 #else
 typedef LUA_NUMBER lua_Number;
 #endif
+
+/* size_t is platform dependent. Since we want to read x86 binary code, make sure it's always an unsigned int32 */
+//typedef size_t lua_size_t;
+typedef uint32_t lua_size_t;
+
 
 
 /* mark for all API functions */
