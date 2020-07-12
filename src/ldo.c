@@ -94,7 +94,7 @@ int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
 static void restore_stack_limit (lua_State *L) {
   L->stack_last = L->stack+L->stacksize-1;
   if (L->size_ci > LUA_MAXCALLS) {  /* there was an overflow? */
-    StkIdx inuse = (L->ci - L->base_ci);
+    int inuse = (L->ci - L->base_ci);
     if (inuse + 1 < LUA_MAXCALLS)  /* can `undo' overflow? */
       luaD_reallocCI(L, LUA_MAXCALLS);
   }
@@ -184,7 +184,7 @@ static void adjust_varargs (lua_State *L, int nfixargs, StkId base) {
   int i;
   Table *htab;
   TObject nname;
-  StkIdx actual = L->top - base;  /* actual number of arguments */
+  int actual = L->top - base;  /* actual number of arguments */
   if (actual < nfixargs) {
     luaD_checkstack(L, nfixargs - actual);
     for (; actual < nfixargs; ++actual)
