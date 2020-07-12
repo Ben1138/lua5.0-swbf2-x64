@@ -312,7 +312,7 @@ int luaV_equalval (lua_State *L, const TObject *t1, const TObject *t2) {
 }
 
 
-void luaV_concat (lua_State *L, lua_int total, lua_int last) {
+void luaV_concat (lua_State *L, StkIdx total, StkIdx last) {
   do {
     StkId top = L->base + last + 1;
     int n = 2;  /* number of elements handled in this pass (at least 2) */
@@ -733,8 +733,8 @@ StkId luaV_execute (lua_State *L) {
       }
       case OP_SETLIST:
       case OP_SETLISTO: {
-        lua_int bc;
-        lua_int n;
+        int bc;
+        int n;
         Table *h;
         runtime_check(L, ttistable(ra));
         h = hvalue(ra);

@@ -69,28 +69,24 @@
     <IntDir>../obj/lua50_exe/Debug/</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <TargetName>lua50</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <OutDir>../bin/x64/</OutDir>
     <IntDir>../obj/lua50_exe/x64/Debug/</IntDir>
-    <TargetName>lua50.x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/</OutDir>
     <IntDir>../obj/lua50_exe/Release/</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <TargetName>lua50</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <OutDir>../bin/x64/</OutDir>
     <IntDir>../obj/lua50_exe/x64/Release/</IntDir>
-    <TargetName>lua50.x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,8 +134,8 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>lua50.x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)lua50.x64.exe</OutputFile>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)lua50.exe</OutputFile>
       <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)lua50.pdb</ProgramDatabaseFile>
@@ -194,8 +190,8 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>lua50.x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)lua50.x64.exe</OutputFile>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)lua50.exe</OutputFile>
       <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>

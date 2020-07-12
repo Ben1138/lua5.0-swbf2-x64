@@ -30,6 +30,6 @@ const TObject *luaV_gettable (lua_State *L, const TObject *t, TObject *key,
                               int loop);
 void luaV_settable (lua_State *L, const TObject *t, TObject *key, StkId val);
 StkId luaV_execute (lua_State *L);
-void luaV_concat (lua_State *L, lua_int total, lua_int last);
+void luaV_concat (lua_State *L, StkIdx total, StkIdx last);
 
 #endif

@@ -273,7 +273,7 @@ static int io_output (lua_State *L) {
 static int io_readline (lua_State *L);
 
 
-static void aux_lines (lua_State *L, lua_int idx, int close) {
+static void aux_lines (lua_State *L, int idx, int close) {
   lua_pushliteral(L, FILEHANDLE);
   lua_rawget(L, LUA_REGISTRYINDEX);
   lua_pushvalue(L, idx);
@@ -372,7 +372,7 @@ static int read_chars (lua_State *L, FILE *f, size_t n) {
 
 
 static int g_read (lua_State *L, FILE *f, int first) {
-  lua_int nargs = lua_gettop(L) - 1;
+  int nargs = lua_gettop(L) - 1;
   int success;
   int n;
   if (nargs == 0) {  /* no arguments? */
@@ -446,7 +446,7 @@ static int io_readline (lua_State *L) {
 
 
 static int g_write (lua_State *L, FILE *f, int arg) {
-  lua_int nargs = lua_gettop(L) - 1;
+  int nargs = lua_gettop(L) - 1;
   int status = 1;
   for (; nargs--; arg++) {
     if (lua_type(L, arg) == LUA_TNUMBER) {

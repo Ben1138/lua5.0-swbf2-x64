@@ -25,7 +25,7 @@
 #endif
 
 
-typedef int32_t sint32;	/* a signed version for size_t */
+typedef long sint32;	/* a signed version for size_t */
 
 
 static int str_len (lua_State *L) {
@@ -106,7 +106,7 @@ static int str_byte (lua_State *L) {
 
 
 static int str_char (lua_State *L) {
-  lua_int n = lua_gettop(L);  /* number of arguments */
+  int n = lua_gettop(L);  /* number of arguments */
   int i;
   luaL_Buffer b;
   luaL_buffinit(L, &b);
@@ -527,7 +527,7 @@ static int gfind_aux (lua_State *L) {
     const char *e;
     ms.level = 0;
     if ((e = match(&ms, src, p)) != NULL) {
-      lua_int newstart = e-s;
+      int newstart = e-s;
       if (e == src) newstart++;  /* empty match? go at least one position */
       lua_pushnumber(L, (lua_Number)newstart);
       lua_replace(L, lua_upvalueindex(3));
