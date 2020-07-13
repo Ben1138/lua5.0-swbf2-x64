@@ -75,6 +75,7 @@
     <GenerateManifest>false</GenerateManifest>
     <OutDir>../bin/x64/</OutDir>
     <IntDir>../obj/lua50_dll/x64/Debug/</IntDir>
+    <TargetName>lua50-swbf2-x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/</OutDir>
@@ -87,6 +88,7 @@
     <GenerateManifest>false</GenerateManifest>
     <OutDir>../bin/x64/</OutDir>
     <IntDir>../obj/lua50_dll/x64/Release/</IntDir>
+    <TargetName>lua50-swbf2-x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -132,13 +134,13 @@
       <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50.x64.dll</OutputFile>
+      <OutputFile>$(OutDir)lua50-swbf2-x64.dll</OutputFile>
       <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)lua50.x64.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
-      <ImportLibrary>../lib/x64/lua50.x64.lib</ImportLibrary>
+      <ImportLibrary>../lib/x64/lua50-swbf2-x64.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat" CALL "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat"</Command>
