@@ -83,7 +83,8 @@ typedef LUSER_ALIGNMENT_T L_Umaxalign;
 
 /* result of `usual argument conversion' over lua_Number */
 #ifndef LUA_UACNUMBER
-typedef double l_uacNumber;
+//typedef double l_uacNumber;
+typedef float l_uacNumber;
 #else
 typedef LUA_UACNUMBER l_uacNumber;
 #endif
