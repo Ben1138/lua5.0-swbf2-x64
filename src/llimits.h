@@ -142,12 +142,14 @@ typedef uint32_t Instruction;
 
 
 /* maximum stack for a Lua function */
-#define MAXSTACK	250
+//#define MAXSTACK	250
+#define MAXSTACK	128		// TODO: just a guess
 
 
 /* maximum number of variables declared in a function */
 #ifndef MAXVARS
-#define MAXVARS 200           /* arbitrary limit (<MAXSTACK) */
+//#define MAXVARS 200       /* arbitrary limit (<MAXSTACK) */
+#define MAXVARS 120			// TODO: just a guess
 #endif
 
 
