@@ -11,7 +11,7 @@ ifeq ($(CONFIG),Debug)
   OBJDIR := ../obj/lua50_dll/Debug
   OUTDIR := ../bin
   CPPFLAGS := -MD -DUSE_TMPNAME=1 -DUSE_POPEN=1 -DUSE_DLOPEN=1 -I "../include"
-  CFLAGS += $(CPPFLAGS) -g
+  CFLAGS += $(CPPFLAGS) -g -fPIC
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared
   LDDEPS :=
@@ -25,7 +25,7 @@ ifeq ($(CONFIG),Release)
   OBJDIR := ../obj/lua50_dll/Release
   OUTDIR := ../bin
   CPPFLAGS := -MD -DUSE_TMPNAME=1 -DUSE_POPEN=1 -DUSE_DLOPEN=1 -I "../include"
-  CFLAGS += $(CPPFLAGS) -O2
+  CFLAGS += $(CPPFLAGS) -O2 -fPIC
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared
   LDDEPS :=
