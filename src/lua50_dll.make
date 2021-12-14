@@ -15,7 +15,7 @@ ifeq ($(CONFIG),Debug)
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared
   LDDEPS :=
-  TARGET := liblua50.so
+  TARGET := liblua50-swbf2-x64.so
   BLDCMD = $(CC) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES)
 endif
 
@@ -29,7 +29,7 @@ ifeq ($(CONFIG),Release)
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared
   LDDEPS :=
-  TARGET := liblua50.so
+  TARGET := liblua50-swbf2-x64.so
   BLDCMD = $(CC) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES)
 endif
 

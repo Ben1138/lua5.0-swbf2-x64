@@ -15,7 +15,7 @@ ifeq ($(CONFIG),Debug)
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared -fPIC -undefined dynamic_lookup
   LDDEPS :=
-  TARGET := liblua50.dylib
+  TARGET := liblua50-swbf2-x64.dylib
   BLDCMD = $(CC) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES)
 endif
 
@@ -29,7 +29,7 @@ ifeq ($(CONFIG),Release)
   CXXFLAGS := $(CFLAGS)
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -shared -fPIC -undefined dynamic_lookup
   LDDEPS :=
-  TARGET := liblua50.dylib
+  TARGET := liblua50-swbf2-x64.dylib
   BLDCMD = $(CC) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES)
 endif
 
