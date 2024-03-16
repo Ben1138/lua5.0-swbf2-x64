@@ -19,30 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7CEB2BA6-A1A6-8947-A3C3-4BB58068D759}</ProjectGuid>
-    <RootNamespace>lua50_dll</RootNamespace>
+    <ProjectGuid>{6DB82676-9A9B-6B49-A144-9D58E992D4D9}</ProjectGuid>
+    <RootNamespace>luac50_exe</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -66,35 +66,33 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>../bin/</OutDir>
-    <IntDir>../obj/lua50_dll/Debug/</IntDir>
+    <IntDir>../obj/luac50_exe/Debug/</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>../bin/x64/Debug/</OutDir>
-    <IntDir>../obj/lua50_dll/x64/Debug/</IntDir>
-    <TargetName>lua50-swbf2-x64</TargetName>
+    <OutDir>../bin/x64/</OutDir>
+    <IntDir>../obj/luac50_exe/x64/Debug/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/</OutDir>
-    <IntDir>../obj/lua50_dll/Release/</IntDir>
+    <IntDir>../obj/luac50_exe/Release/</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>../bin/x64/Release/</OutDir>
-    <IntDir>../obj/lua50_dll/x64/Release/</IntDir>
-    <TargetName>lua50-swbf2-x64</TargetName>
+    <OutDir>../bin/x64/</OutDir>
+    <IntDir>../obj/luac50_exe/x64/Release/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>USE_TMPNAME=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_OPNAMES;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -104,24 +102,25 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50.dll</OutputFile>
-      <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
+      <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)luac50.exe</OutputFile>
+      <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)lua50.pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>../lib/lua50.lib</ImportLibrary>
+      <ProgramDatabaseFile>$(OutDir)luac50.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>USE_TMPNAME=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_OPNAMES;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -131,26 +130,24 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50-swbf2-x64.dll</OutputFile>
-      <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
+      <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)luac50.exe</OutputFile>
+      <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)lua50-swbf2-x64.pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>../lib/x64/lua50-swbf2-x64.lib</ImportLibrary>
+      <ProgramDatabaseFile>$(OutDir)luac50.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat" CALL "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>USE_TMPNAME=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_OPNAMES;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -159,25 +156,26 @@
       <DebugInformationFormat />
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50.dll</OutputFile>
-      <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
+      <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)luac50.exe</OutputFile>
+      <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <ImportLibrary>../lib/lua50.lib</ImportLibrary>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>USE_TMPNAME=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_OPNAMES;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -188,79 +186,27 @@
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)lua50-swbf2-x64.dll</OutputFile>
-      <AdditionalLibraryDirectories>../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>../src/lua50.def</ModuleDefinitionFile>
+      <AdditionalOptions> setargv.obj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>lua50.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)luac50.exe</OutputFile>
+      <AdditionalLibraryDirectories>../lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <ImportLibrary>../lib/x64/lua50-swbf2-x64.lib</ImportLibrary>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat" CALL "$(SolutionDir)..\..\..\CopyLibSWBF2Binaries_$(Configuration).bat"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\lapi.c" />
-    <ClCompile Include="..\src\lcode.c" />
-    <ClCompile Include="..\src\ldebug.c" />
-    <ClCompile Include="..\src\ldo.c" />
-    <ClCompile Include="..\src\ldump.c" />
-    <ClCompile Include="..\src\lfunc.c" />
-    <ClCompile Include="..\src\lgc.c" />
-    <ClCompile Include="..\src\lib\lauxlib.c" />
-    <ClCompile Include="..\src\lib\lbaselib.c" />
-    <ClCompile Include="..\src\lib\ldblib.c" />
-    <ClCompile Include="..\src\lib\liolib.c" />
-    <ClCompile Include="..\src\lib\lmathlib.c" />
-    <ClCompile Include="..\src\lib\loadlib.c" />
-    <ClCompile Include="..\src\lib\lstrlib.c" />
-    <ClCompile Include="..\src\lib\ltablib.c" />
-    <ClCompile Include="..\src\llex.c" />
-    <ClCompile Include="..\src\lmem.c" />
-    <ClCompile Include="..\src\lobject.c" />
     <ClCompile Include="..\src\lopcodes.c" />
-    <ClCompile Include="..\src\lparser.c" />
-    <ClCompile Include="..\src\lstate.c" />
-    <ClCompile Include="..\src\lstring.c" />
-    <ClCompile Include="..\src\ltable.c" />
-    <ClCompile Include="..\src\ltests.c" />
-    <ClCompile Include="..\src\ltm.c" />
-    <ClCompile Include="..\src\lundump.c" />
-    <ClCompile Include="..\src\lvm.c" />
-    <ClCompile Include="..\src\lzio.c" />
+    <ClCompile Include="..\src\luac\luac.c" />
+    <ClCompile Include="..\src\luac\print.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\lua50.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\lauxlib.h" />
-    <ClInclude Include="..\include\lua.h" />
-    <ClInclude Include="..\include\lua.hpp" />
-    <ClInclude Include="..\include\lualib.h" />
-    <ClInclude Include="..\src\lapi.h" />
-    <ClInclude Include="..\src\lcode.h" />
-    <ClInclude Include="..\src\ldebug.h" />
-    <ClInclude Include="..\src\ldo.h" />
-    <ClInclude Include="..\src\lfunc.h" />
-    <ClInclude Include="..\src\lgc.h" />
-    <ClInclude Include="..\src\llex.h" />
-    <ClInclude Include="..\src\llimits.h" />
-    <ClInclude Include="..\src\lmem.h" />
-    <ClInclude Include="..\src\lobject.h" />
-    <ClInclude Include="..\src\lopcodes.h" />
-    <ClInclude Include="..\src\lparser.h" />
-    <ClInclude Include="..\src\lstate.h" />
-    <ClInclude Include="..\src\lstring.h" />
-    <ClInclude Include="..\src\ltable.h" />
-    <ClInclude Include="..\src\ltm.h" />
-    <ClInclude Include="..\src\lundump.h" />
-    <ClInclude Include="..\src\lvm.h" />
-    <ClInclude Include="..\src\lzio.h" />
+    <ResourceCompile Include="..\src\lua.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
